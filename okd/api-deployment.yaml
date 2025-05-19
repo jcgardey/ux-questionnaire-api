@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ux-questionnaire-api
+  name: ux-questionnaire-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     app: ux-questionnaire-api        
+  template:
+    metadata:            
+      labels:
+        app: ux-questionnaire-api        
+    spec:
+      containers:
+        - name: ux-questionnaire-api
+          image: jcgardey/ux-questionnaire:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              protocol: TCP
+          env:
+            # Define the environment variable
+            - name: DB_NAME 
+              value: "uxquestionnaire"  
+            - name: DB_PASS
+              value: "ux-questionnaire"  
+            - name: DB_USER
+              value: "ux-questionnaire"  
+            - name: DB_HOST
+              value: "ux-questionnaire-db"  

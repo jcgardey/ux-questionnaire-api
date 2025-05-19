@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:  
+  name: ux-questionnaire-db
+spec:
+  ports:    
+    - name: ux-questionnaire-db
+      protocol: TCP
+      port: 3306
+      targetPort: 3306    
+  selector:
+    app: ux-questionnaire-db
+  clusterIP: None  
+  type: ClusterIP
+  sessionAffinity: None

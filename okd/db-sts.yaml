@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ux-questionnaire-db  
+spec:
+  podManagementPolicy: Parallel
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: ux-questionnaire-db
+  serviceName: ux-questionnaire-db
+  template:
+    metadata:      
+      labels:
+        app: ux-questionnaire-db
+    spec:
+      containers:
+        - name: ux-questionnaire-db
+          image: mariadb:11.0
+          imagePullPolicy: IfNotPresent          
+          ports:
+            - containerPort: 3306
+              protocol: TCP   
+          env:
+            - name: MYSQL_USER
+              value: "ux-questionnaire"  
+            - name: MYSQL_PASSWORD
+              value: "ux-questionnaire"  
+            - name: MYSQL_ROOT_PASSWORD
+              value: "ux-questionnaire"  
+            - name: MYSQL_DATABASE
+              value: "uxquestionnaire"  
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              name: ux-questionnaire-db
+            - mountPath: /etc/mysql/conf.d/
+              name: config-volume
+            - mountPath: /docker-entrypoint-initdb.d
+              name: init-volume
+      volumes:
+      - name: config-volume
+        configMap:
+          name: mariadb-config
+      - name: init-volume
+        configMap:
+          name: mariadb-init
+  volumeClaimTemplates:
+    - metadata:        
+        name: ux-questionnaire-db
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi

@@ -1,0 +1,38 @@
+version: '3'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+    tty: true
+    environment:
+      SERVICE_NAME: api
+      SERVICE_TAGS: dev
+      DB_NAME: ux-questionnaire
+      DB_USER: ux-questionnaire
+      DB_PASS: ux-questionnaire
+      DB_HOST: ux-questionnaire-db
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./src:/usr/src/app/ux-questionnaire-api/src
+  db:
+    image: mariadb:11.0
+    container_name: ux-questionnaire-db
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    tty: true
+    ports:
+      - ${DB_PORT-3306}:3306
+    environment:
+      MYSQL_DATABASE: ux-questionnaire
+      MYSQL_ROOT_PASSWORD: ux-questionnaire
+      MYSQL_USER: ux-questionnaire
+      MYSQL_PASSWORD: ux-questionnaire
+      SERVICE_TAGS: dev
+    volumes:
+      - database:/var/lib/mysql
+volumes:
+  database:
+    driver: local

@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:  
+  name: ux-questionnaire-api
+spec:
+  ports:    
+    - name: ux-questionnaire-api
+      protocol: TCP
+      port: 8000
+      targetPort: 8000    
+  selector:
+    app: ux-questionnaire-api
