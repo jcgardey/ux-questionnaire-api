@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import QuestionnaireResponse, QuestionnaireResponseItem
 from rest_framework import serializers
 from questionnaire.models import QuestionnaireItem
+from functools import reduce
 
 
 class CreateQuestionnaireResponseSerializer(serializers.ModelSerializer):
@@ -35,6 +36,8 @@ class AddResponseItemsSerializer(serializers.Serializer):
     def create(self, validated_data):
         questionnare_response = self.context['questionnaire_response']
         items = validated_data['items']
+        if len(items) > questionnare_response.questionnaire.selectable_items:
+            raise serializers.ValidationError("items_exceeds_maximum")
         created = []
         for item_id in items:
             item = QuestionnaireItem.objects.get(pk=item_id)
@@ -43,4 +46,7 @@ class AddResponseItemsSerializer(serializers.Serializer):
                 questionnaire_item=item
             )
             created.append(obj)
+            accumulated_effort = reduce(lambda acc, item:  acc + item.questionnaire_item.effort, created, 0)
+            if (accumulated_effort > questionnare_response.questionnaire.avaible_effort):
+                raise serializers.ValidationError("effort_exceeds_maximum")
         return created

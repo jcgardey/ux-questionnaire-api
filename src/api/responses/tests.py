@@ -42,10 +42,11 @@ from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
 from .models import QuestionnaireResponse, QuestionnaireResponseItem
-from questionnaire.models import QuestionnaireItem
+from questionnaire.models import QuestionnaireItem, Questionnaire
 
 class AddItemsToQuestionnaireResponseAPITest(APITestCase):
     def setUp(self):
+        self.questionnaire = Questionnaire.objects.create(selectable_items=2, avaible_effort=100)
         self.response = QuestionnaireResponse.objects.create(
             age=28,
             gender='L',
@@ -53,10 +54,12 @@ class AddItemsToQuestionnaireResponseAPITest(APITestCase):
             agile_experience='NEVER',
             project_type='WEB',
             project_type_other='',
-            sprint_planning_experience='NEVER'
+            sprint_planning_experience='NEVER',
+            questionnaire=self.questionnaire
         )
-        self.item1 = QuestionnaireItem.objects.create(text='Item 1')
-        self.item2 = QuestionnaireItem.objects.create(text='Item 2')
+        self.item1 = QuestionnaireItem.objects.create(description='Item 1', effort=10, questionnaire=self.questionnaire)
+        self.item2 = QuestionnaireItem.objects.create(description='Item 2', effort=20, questionnaire=self.questionnaire)
+        self.item3 = QuestionnaireItem.objects.create(description='Item 3', effort=90, questionnaire=self.questionnaire)
 
     def test_add_items_to_response(self):
         url = reverse('questionnaire-response-add-items', args=[self.response.pk])
@@ -71,3 +74,19 @@ class AddItemsToQuestionnaireResponseAPITest(APITestCase):
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn('items', response.data)
+
+    def test_add_items_exceeds_maximum(self):
+        url = reverse('questionnaire-response-add-items', args=[self.response.pk])
+        # Try to add more items than selectable_items allows
+        data = {"items": [self.item1.pk, self.item2.pk, self.item3.pk]}
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('items_exceeds_maximum', str(response.data[0]))
+
+    def test_add_items_exceeds_effort(self):
+        url = reverse('questionnaire-response-add-items', args=[self.response.pk])
+        # Try to add more items than selectable_items allows
+        data = {"items": [self.item2.pk, self.item3.pk]}
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertIn('effort_exceeds_maximum', str(response.data[0]))

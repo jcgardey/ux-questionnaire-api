@@ -1,5 +1,5 @@
 from django.db import models
-from questionnaire.models import QuestionnaireItem
+from questionnaire.models import QuestionnaireItem, Questionnaire
 
 
 
@@ -55,6 +55,8 @@ class QuestionnaireResponse(models.Model):
         max_length=15,
         choices=SprintPlanningExperience.choices
     )
+
+    questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE, related_name='questionnaire_responses', null=True)
 
 
 class QuestionnaireResponseItem(models.Model):

@@ -3,6 +3,8 @@ from django.db import models
 
 class Questionnaire(models.Model):
     name = models.CharField(max_length=100)
+    avaible_effort = models.PositiveIntegerField(default=100)
+    selectable_items = models.PositiveIntegerField(default=10)
 
 
 class QuestionnaireItem(models.Model):
