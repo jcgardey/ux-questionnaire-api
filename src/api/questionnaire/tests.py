@@ -14,14 +14,16 @@ class QuestionnaireCreateAPITest(APITestCase):
                     "contribution": "Contribution 1",
                     "severity": "L",
                     "category": "TE",
-                    "effort": 1
+                    "effort": 1,
+                    "code": "ITEM1" 
                 },
                 {
                     "description": "Item 2",
                     "contribution": "Contribution 2",
                     "severity": "M",
                     "category": "UX",
-                    "effort": 2
+                    "effort": 2,
+                    "code": "ITEM2" 
                 }
             ]
         }
@@ -46,7 +48,7 @@ class QuestionnaireCreateAPITest(APITestCase):
                     "contribution": "Contribution 1",
                     "severity": "L",
                     "category": "TE",
-                    "effort": 1
+                    "effort": 1,
                 },
                 {
                     # Missing 'description' field, which should be required

@@ -18,8 +18,10 @@ class QuestionnaireItem(models.Model):
         TECH = 'TE', 'Tech'
         UX = 'UX', 'UX'
         MIX = 'MX', 'Mixed'
-
+    
+    
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE, related_name='items')
+    code = models.CharField(max_length=20, unique=True, null=True, blank=True)
     description = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     contribution = models.CharField(max_length=500)
