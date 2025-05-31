@@ -1,0 +1,208 @@
+POST http://localhost:8000/questionnaire/new HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Priorizacion de Tareas",
+    "items": [
+        {
+            "code": "ID1",
+            "description": "Asegurar que el código del socio enviado cuando el motor instalado por el usuario es reemplazado por un motor habilitado por región.",
+            "contribution": "Reduce la compatibilidad en regiones específicas.",
+            "severity": "M",
+            "category": "TE",
+            "effort": 15
+        },
+        {
+            "code": "ID2",
+            "description": "browser.showingSearchTerms debe actualizarse cuando un usuario cambia la preferencia de showSearchTerms.shouldShow.",
+            "contribution": "Reduce la usabilidad en el manejo de preferencias.",
+            "severity": "M",
+            "category": "MX",
+            "effort": 20
+        },
+        {
+            "code": "ID3",
+            "description": "fetchAndUnwrapKeys no debe desconectar al usuario.",
+            "contribution": "Causa cierres de sesión inesperados de usuarios.",
+            "severity": "H",
+            "category": "TE",
+            "effort": 25
+        },
+        {
+            "code": "ID4",
+            "description": "Detener el formateo de la URL cuando hay texto escrito por el usuario en la barra de URL.",
+            "contribution": "Crea frustración en el usuario con el autocompletado.",
+            "severity": "H",
+            "category": "UX",
+            "effort": 20
+        },
+        {
+            "code": "ID5",
+            "description": "Asegurar que todos los eventos de usuarios de DS pasen información de origen a la tubería de datos.",
+            "contribution": "Reduce la precisión de los datos analíticos.",
+            "severity": "M",
+            "category": "TE",
+            "effort": 15
+        },
+        {
+            "code": "ID7",
+            "description": "La interfaz de usuario para instalar en el AppData del usuario debe ser más intuitiva que rechazar el mensaje UAC.",
+            "contribution": "Aumenta la confusión durante la instalación.",
+            "severity": "M",
+            "category": "UX",
+            "effort": 15
+        },
+        {
+            "code": "ID10",
+            "description": "Requerir interacción del usuario para todas las descargas excepto la primera desde una página para evitar spam de descargas.",
+            "contribution": "Mejora la seguridad del usuario contra el spam de descargas.",
+            "severity": "H",
+            "category": "TE",
+            "effort": 40
+        },
+        {
+            "code": "ID11",
+            "description": "Los sitios principales de la barra de direcciones deben enlazar a la Actividad Stream de la nueva pestaña para que los usuarios sepan de dónde vienen los elementos y cómo personalizarlos.",
+            "contribution": "Mejora la conciencia del usuario y la personalización.",
+            "severity": "H",
+            "category": "UX",
+            "effort": 20
+        },
+        {
+            "code": "ID12",
+            "description": "\"www\" debe excluirse de las sugerencias de URL y autocompletar cuando el usuario escribe \"w\".",
+            "contribution": "Reduce la carga cognitiva para los usuarios frecuentes.",
+            "severity": "L",
+            "category": "UX",
+            "effort": 10
+        },
+        {
+            "code": "ID14",
+            "description": "Evaluar la notificación al usuario cuando los Lugares no puedan ser accesados desde la barra de URL.",
+            "contribution": "Mejora la transparencia en el manejo de errores.",
+            "severity": "M",
+            "category": "MX",
+            "effort": 20
+        },
+        {
+            "code": "ID17",
+            "description": "Los usuarios con perfiles nuevos ven la página de Bienvenida a la aplicación en sus Destacados.",
+            "contribution": "Mejora la incorporación de usuarios.",
+            "severity": "M",
+            "category": "UX",
+            "effort": 15
+        },
+        {
+            "code": "ID18",
+            "description": "La nueva interfaz de la barra de ubicación elimina la posibilidad de ver y copiar la URL real del marcador si el usuario escribe una palabra clave en la barra de URL.",
+            "contribution": "Reduce el control del usuario sobre los marcadores.",
+            "severity": "H",
+            "category": "MX",
+            "effort": 20
+        },
+        {
+            "code": "ID19",
+            "description": "Las URLs de datos potencialmente maliciosas no se destacan bien para los usuarios novatos.",
+            "contribution": "Reduce la seguridad del usuario contra el phishing.",
+            "severity": "H",
+            "category": "TE",
+            "effort": 35
+        },
+        {
+            "code": "ID20",
+            "description": "Permitir el control del usuario sobre la escritura de metadatos kMDItemWhereFroms en las descargas en macOS.",
+            "contribution": "Mejora la privacidad del usuario.",
+            "severity": "M",
+            "category": "TE",
+            "effort": 20
+        },
+        {
+            "code": "ID22",
+            "description": "La Vista de Aplicación  podría querer ofrecer a los usuarios una manera de descartar mosaicos de Tab Pickup sensibles/no deseados.",
+            "contribution": "Aumenta el control del usuario sobre el contenido sensible.",
+            "severity": "M",
+            "category": "UX",
+            "effort": 15
+        },
+        {
+            "code": "ID23",
+            "description": "Limpiar las descargas bloqueadas cuando el usuario abandona el sitio web.",
+            "contribution": "Mejora la seguridad y reduce el desorden.",
+            "severity": "H",
+            "category": "TE",
+            "effort": 20
+        },
+        {
+            "code": "ID24",
+            "description": "El ícono predeterminado para SearchSwitcher indica que se realizará una búsqueda incluso si el usuario escribe una URL.",
+            "contribution": "Crea confusión sobre la funcionalidad de búsqueda.",
+            "severity": "M",
+            "category": "UX",
+            "effort": 15
+        },
+        {
+            "code": "ID25",
+            "description": "Confirmar qué sucede con los motores contextuales cuando el usuario cambia entre regiones/locales donde se proporcionan por defecto.",
+            "contribution": "Asegura la consistencia en la experiencia del usuario.",
+            "severity": "M",
+            "category": "MX",
+            "effort": 15
+        },
+        {
+            "code": "ID26",
+            "description": "Cuando una consulta genera un SERP, mostrar los sitios que el usuario visitó desde ese SERP.",
+            "contribution": "Mejora la comprensión del historial de búsqueda por parte del usuario.",
+            "severity": "M",
+            "category": "UX",
+            "effort": 15
+        },
+        {
+            "code": "ID27",
+            "description": "Los términos de búsqueda o la URI en la barra de URL no se actualizan cuando un usuario cambia su motor de búsqueda predeterminado hasta que recargan la página.",
+            "contribution": "Crea inconsistencias en la experiencia de búsqueda.",
+            "severity": "H",
+            "category": "MX",
+            "effort": 20
+        },
+        {
+            "code": "ID28",
+            "description": "Añadir documentación para la creación de versiones de prueba de usuario.",
+            "contribution": "Mejora el flujo de trabajo y la eficiencia del desarrollador.",
+            "severity": "L",
+            "category": "TE",
+            "effort": 10
+        },
+        {
+            "code": "ID30",
+            "description": "Permitir a los usuarios acceder a las acciones del menú contextual para los medios subyacentes en más casos.",
+            "contribution": "Aumenta la usabilidad de los controles multimedia.",
+            "severity": "M",
+            "category": "UX",
+            "effort": 15
+        },
+        {
+            "code": "ID31",
+            "description": "Permitir que los usuarios se excluyan de la autocompletación de búsqueda al iniciar por primera vez.",
+            "contribution": "Mejora la personalización del usuario.",
+            "severity": "L",
+            "category": "UX",
+            "effort": 10
+        },
+        {
+            "code": "ID32",
+            "description": "Los usuarios fotosensibles requieren configuraciones para deshabilitar animaciones.",
+            "contribution": "Mejora la accesibilidad para usuarios fotosensibles.",
+            "severity": "H",
+            "category": "UX",
+            "effort": 25
+        },
+        {
+            "code": "ID35",
+            "description": "(Quantumbar) Permitir que los usuarios elijan el diseño de dos líneas",
+            "contribution": "Aumenta la flexibilidad para la personalización de la interfaz.",
+            "severity": "M",
+            "category": "UX",
+            "effort": 15
+        }
+    ]
+}

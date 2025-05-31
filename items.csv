@@ -1,0 +1,26 @@
+ID,Descripcion,Contribución,Severidad,Categoría,Esfuerzo ,Incluir
+ID1,Asegurar que el código del socio enviado cuando el motor instalado por el usuario es reemplazado por un motor habilitado por región. ,Reduce la compatibilidad en regiones específicas.,Media,Técnico ,15,FALSE
+ID2,browser.showingSearchTerms debe actualizarse cuando un usuario cambia la preferencia de showSearchTerms.shouldShow. ,Reduce la usabilidad en el manejo de preferencias.,Media,Mixto ,20,FALSE
+ID3,fetchAndUnwrapKeys no debe desconectar al usuario. ,Causa cierres de sesión inesperados de usuarios.,Alta,Técnico ,25,FALSE
+ID4,Detener el formateo de la URL cuando hay texto escrito por el usuario en la barra de URL. ,Crea frustración en el usuario con el autocompletado.,Alta,UX ,20,FALSE
+ID5,Asegurar que todos los eventos de usuarios de DS pasen información de origen a la tubería de datos. ,Reduce la precisión de los datos analíticos.,Media,Técnico ,15,FALSE
+ID7,La interfaz de usuario para instalar en el AppData del usuario debe ser más intuitiva que rechazar el mensaje UAC. ,Aumenta la confusión durante la instalación.,Media,UX ,15,FALSE
+ID10,Requerir interacción del usuario para todas las descargas excepto la primera desde una página para evitar spam de descargas. ,Mejora la seguridad del usuario contra el spam de descargas.,Alta,Técnico ,40,FALSE
+ID11,Los sitios principales de la barra de direcciones deben enlazar a la Actividad Stream de la nueva pestaña para que los usuarios sepan de dónde vienen los elementos y cómo personalizarlos. ,Mejora la conciencia del usuario y la personalización.,Alta,UX ,20,FALSE
+ID12,"""www"" debe excluirse de las sugerencias de URL y autocompletar cuando el usuario escribe ""w"". ",Reduce la carga cognitiva para los usuarios frecuentes.,Baja,UX ,10,FALSE
+ID14,Evaluar la notificación al usuario cuando los Lugares no puedan ser accesados desde la barra de URL. ,Mejora la transparencia en el manejo de errores.,Media,Mixto ,20,FALSE
+ID17,Los usuarios con perfiles nuevos ven la página de Bienvenida a la aplicación en sus Destacados. ,Mejora la incorporación de usuarios.,Media,UX ,15,FALSE
+ID18,La nueva interfaz de la barra de ubicación elimina la posibilidad de ver y copiar la URL real del marcador si el usuario escribe una palabra clave en la barra de URL. ,Reduce el control del usuario sobre los marcadores.,Alta,Mixto ,20,FALSE
+ID19,Las URLs de datos potencialmente maliciosas no se destacan bien para los usuarios novatos. ,Reduce la seguridad del usuario contra el phishing.,Alta,Técnico ,35,FALSE
+ID20,Permitir el control del usuario sobre la escritura de metadatos kMDItemWhereFroms en las descargas en macOS. ,Mejora la privacidad del usuario.,Media,Técnico ,20,FALSE
+ID22,La Vista de Aplicación  podría querer ofrecer a los usuarios una manera de descartar mosaicos de Tab Pickup sensibles/no deseados. ,Aumenta el control del usuario sobre el contenido sensible.,Media,UX ,15,FALSE
+ID23,Limpiar las descargas bloqueadas cuando el usuario abandona el sitio web. ,Mejora la seguridad y reduce el desorden.,Alta,Técnico ,20,FALSE
+ID24,El ícono predeterminado para SearchSwitcher indica que se realizará una búsqueda incluso si el usuario escribe una URL. ,Crea confusión sobre la funcionalidad de búsqueda.,Media,UX ,15,FALSE
+ID25,Confirmar qué sucede con los motores contextuales cuando el usuario cambia entre regiones/locales donde se proporcionan por defecto. ,Asegura la consistencia en la experiencia del usuario.,Media,Mixto ,15,FALSE
+ID26,"Cuando una consulta genera un SERP, mostrar los sitios que el usuario visitó desde ese SERP. ",Mejora la comprensión del historial de búsqueda por parte del usuario.,Media,UX ,15,FALSE
+ID27,Los términos de búsqueda o la URI en la barra de URL no se actualizan cuando un usuario cambia su motor de búsqueda predeterminado hasta que recargan la página. ,Crea inconsistencias en la experiencia de búsqueda.,Alta,Mixto ,20,FALSE
+ID28,Añadir documentación para la creación de versiones de prueba de usuario. ,Mejora el flujo de trabajo y la eficiencia del desarrollador.,Baja,Técnico ,10,FALSE
+ID30,Permitir a los usuarios acceder a las acciones del menú contextual para los medios subyacentes en más casos. ,Aumenta la usabilidad de los controles multimedia.,Media,UX ,15,FALSE
+ID31,Permitir que los usuarios se excluyan de la autocompletación de búsqueda al iniciar por primera vez. ,Mejora la personalización del usuario.,Baja,UX ,10,FALSE
+ID32,Los usuarios fotosensibles requieren configuraciones para deshabilitar animaciones. ,Mejora la accesibilidad para usuarios fotosensibles.,Alta,UX ,25,FALSE
+ID35,(Quantumbar) Permitir que los usuarios elijan el diseño de dos líneas,Aumenta la flexibilidad para la personalización de la interfaz.,Media,UX ,15,FALSE
