@@ -9,7 +9,7 @@ class QuestionnaireItemSerializer(serializers.ModelSerializer):
         exclude = ['questionnaire', 'id', 'created_at']
 
 class QuestionnaireSerializer(serializers.ModelSerializer):
-    items = QuestionnaireItemSerializer(many=True, write_only=True)
+    items = QuestionnaireItemSerializer(many=True)
 
     class Meta:
         model = Questionnaire
