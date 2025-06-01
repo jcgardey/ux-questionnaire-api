@@ -13,6 +13,7 @@ class CreateQuestionnaireResponseSerializer(serializers.ModelSerializer):
             'age',
             'gender',
             'role',
+            'role_experience',
             'agile_experience',
             'project_type',
             'project_type_other',

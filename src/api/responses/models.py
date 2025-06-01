@@ -18,6 +18,11 @@ class QuestionnaireResponse(models.Model):
         UX = 'UX', 'UX'
         LEADER = 'LEAD', 'Leader'
 
+    class RoleExperience(models.TextChoices): 
+        JUNIOR  = '<1', 'Junior'
+        SSR = '1-3', 'Semi Senior'
+        SENIOR = '>5', 'Senior'
+
     class AgileExperience(models.TextChoices):
         NEVER = 'NEVER', 'Nunca trabaje con métodos ágiles'
         OCCASIONAL = 'OCCASIONAL', 'He trabajado ocasionalmente con métodos ágiles'
@@ -37,6 +42,7 @@ class QuestionnaireResponse(models.Model):
     age = models.PositiveIntegerField(default=0)
     gender = models.CharField(max_length=2, choices=Gender.choices)
     role = models.CharField(max_length=4, choices=Role.choices)
+    role_experience = models.CharField(max_length=4, choices=RoleExperience.choices, default=RoleExperience.JUNIOR)
     agile_experience = models.CharField(
         max_length=10,
         choices=AgileExperience.choices,
@@ -57,6 +63,9 @@ class QuestionnaireResponse(models.Model):
     )
 
     questionnaire = models.ForeignKey(Questionnaire, on_delete=models.CASCADE, related_name='questionnaire_responses', null=True)
+
+    def has_item_with_code(self, code):
+        return self.response_items.filter(questionnaire_item__code=code).exists()
 
 
 class QuestionnaireResponseItem(models.Model):
