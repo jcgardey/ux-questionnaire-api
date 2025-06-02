@@ -6,14 +6,14 @@ from .models import Questionnaire, QuestionnaireItem
 class QuestionnaireItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuestionnaireItem
-        exclude = ['questionnaire', 'id', 'created_at']
+        exclude = ['questionnaire', 'created_at']
 
 class QuestionnaireSerializer(serializers.ModelSerializer):
     items = QuestionnaireItemSerializer(many=True)
 
     class Meta:
         model = Questionnaire
-        fields = ['id', 'name', 'items']
+        fields = ['id', 'name', 'items', 'avaible_effort', 'selectable_items']
 
     def create(self, validated_data):
         items_data = validated_data.pop('items')
