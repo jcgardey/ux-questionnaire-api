@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-*5a#_m3%r0y5q)lnb*771ypmj9h__y^(nni2!=dt^g0mhdp8ia
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'ux-questionnaire-api.okd.lifia.info.unlp.edu.ar']
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://ux-questionnaire.okd.lifia.info.unlp.edu.ar']
 
 
 # Application definition
