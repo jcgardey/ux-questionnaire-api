@@ -46,7 +46,7 @@ class ExportQuestionnaireResponsesAPI(APIView):
 
         writer = csv.writer(response)
 
-        all_questionnaire_items = list(map(lambda i: i.code, questionnaire.items.all().order_by('code')))
+        all_questionnaire_items = list(map(lambda i: i.code, questionnaire.items.all()))
         # Write header
         writer.writerow([
             'Fecha', 'Edad', 'Genero', 'Role', 'Experiencia en el rol', 'Experiencia con métodos ágiles',
