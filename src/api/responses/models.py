@@ -7,8 +7,8 @@ from datetime import datetime
 class QuestionnaireResponse(models.Model):
 
     class Gender(models.TextChoices):
-        MALE = 'L', 'Low'
-        FEMALE = 'M', 'Medium'
+        MALE = 'M', 'Male'
+        FEMALE = 'F', 'Female'
         NO_BINARY = 'NB', 'No Binary'      
         NO_LISTED = 'NL', 'No Listed',
         UNKNOWN = 'U', 'Unknown'
