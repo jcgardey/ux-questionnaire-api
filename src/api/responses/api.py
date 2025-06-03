@@ -24,3 +24,10 @@ class AddItemsToQuestionnaireResponseAPI(APIView):
             return Response({"detail": "Items added."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+class DeleteQuestionnaireResponseAPI(APIView):
+
+    def delete(self, request, questionnaire_response_id):
+        questionnaire_response = get_object_or_404(QuestionnaireResponse, pk=questionnaire_response_id)
+        questionnaire_response.delete()
+        return Response({"detail": "Questionnaire response deleted."}, status=status.HTTP_204_NO_CONTENT)
