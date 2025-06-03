@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import QuestionnaireResponse, QuestionnaireResponseItem
 from rest_framework import serializers
 from questionnaire.models import QuestionnaireItem
+from questionnaire.serializers import QuestionnaireItemSerializer
 from functools import reduce
 
 
@@ -52,3 +53,17 @@ class AddResponseItemsSerializer(serializers.Serializer):
             if (accumulated_effort > questionnare_response.questionnaire.avaible_effort):
                 raise serializers.ValidationError("effort_exceeds_maximum")
         return created
+    
+class QuestionnaireResponseItemSerializer(serializers.ModelSerializer):
+    questionnaire_item = QuestionnaireItemSerializer()
+
+    class Meta:
+        model = QuestionnaireResponseItem
+        exclude = ['response']
+    
+class GetResponseSerializer(serializers.ModelSerializer):
+    response_items = QuestionnaireResponseItemSerializer(many=True)
+
+    class Meta:
+        model = QuestionnaireResponse
+        fields = '__all__'

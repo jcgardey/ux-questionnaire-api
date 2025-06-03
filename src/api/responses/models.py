@@ -1,5 +1,6 @@
 from django.db import models
 from questionnaire.models import QuestionnaireItem, Questionnaire
+from datetime import datetime
 
 
 
@@ -39,6 +40,7 @@ class QuestionnaireResponse(models.Model):
         ONLY_CRITICAL = 'ONLY_CRITICAL', 'Participo sólo cuando hay ítems críticos relacionados con mi rol'
         NEVER = 'NEVER', 'Nunca participo de esas actividades'
 
+    created_at = models.DateTimeField(auto_now=True)
     age = models.PositiveIntegerField(default=0)
     gender = models.CharField(max_length=2, choices=Gender.choices)
     role = models.CharField(max_length=4, choices=Role.choices)
