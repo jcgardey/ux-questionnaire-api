@@ -22,7 +22,8 @@ class QuestionnaireResponse(models.Model):
     class RoleExperience(models.TextChoices): 
         JUNIOR  = '<1', 'Junior'
         SSR = '1-3', 'Semi Senior'
-        SENIOR = '>5', 'Senior'
+        SENIOR = '3-5', 'Senior'
+        LEAD = '>5', 'Lead'
 
     class AgileExperience(models.TextChoices):
         NEVER = 'NEVER', 'Nunca trabaje con métodos ágiles'
