@@ -31,27 +31,29 @@ class AddResponseItemsSerializer(serializers.Serializer):
     )
 
     def validate_items(self, value):
+        questionnare_response = self.context['questionnaire_response']
         invalid_ids = [pk for pk in value if not QuestionnaireItem.objects.filter(pk=pk).exists()]
         if invalid_ids:
             raise serializers.ValidationError(f"Invalid QuestionnaireItem ids: {invalid_ids}")
-        return value
+        if len(value) > questionnare_response.questionnaire.selectable_items:
+            raise serializers.ValidationError("items_exceeds_maximum")
+        
+        items = [QuestionnaireItem.objects.get(pk=pk) for pk in value]
+        accumulated_effort = reduce(lambda acc, item:  acc + item.effort, items, 0)
+        if (accumulated_effort > questionnare_response.questionnaire.avaible_effort):
+            raise serializers.ValidationError("effort_exceeds_maximum")
+        return items
 
     def create(self, validated_data):
         questionnare_response = self.context['questionnaire_response']
         items = validated_data['items']
-        if len(items) > questionnare_response.questionnaire.selectable_items:
-            raise serializers.ValidationError("items_exceeds_maximum")
         created = []
-        for item_id in items:
-            item = QuestionnaireItem.objects.get(pk=item_id)
+        for item in items:
             obj, _ = QuestionnaireResponseItem.objects.get_or_create(
                 response=questionnare_response,
                 questionnaire_item=item
             )
             created.append(obj)
-            accumulated_effort = reduce(lambda acc, item:  acc + item.questionnaire_item.effort, created, 0)
-            if (accumulated_effort > questionnare_response.questionnaire.avaible_effort):
-                raise serializers.ValidationError("effort_exceeds_maximum")
         return created
     
 class QuestionnaireResponseItemSerializer(serializers.ModelSerializer):

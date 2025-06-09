@@ -18,9 +18,9 @@ class CreateQuestionnaireResponseAPI(APIView):
 class AddItemsToQuestionnaireResponseAPI(APIView):
     def put(self, request, questionnaire_response_id):
         questionnaire_response = get_object_or_404(QuestionnaireResponse, pk=questionnaire_response_id)
-        questionnaire_response.response_items.all().delete()  # Clear existing items before adding new ones
         serializer = AddResponseItemsSerializer(data=request.data, context={'questionnaire_response': questionnaire_response})
         if serializer.is_valid():
+            questionnaire_response.response_items.all().delete()  # Clear existing items before adding new ones
             serializer.save()
             return Response({"detail": "Items added."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -78,10 +78,17 @@ class AddItemsToQuestionnaireResponseAPITest(APITestCase):
     def test_add_items_invalid_item(self):
         url = reverse('questionnaire-response-add-items', args=[self.response.pk])
 
+        response = self.client.put(url, {"items": [self.item1.pk]}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(QuestionnaireResponseItem.objects.filter(response=self.response).count(), 1)
+
         data = {"items": [9999]}  # Non-existent item
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('items', response.data)        
+        self.assertIn('items', response.data)
+
+        # Ensure no items were added
+        self.assertEqual(QuestionnaireResponseItem.objects.filter(response=self.response).count(), 1)        
 
     def test_add_items_exceeds_maximum(self):
         url = reverse('questionnaire-response-add-items', args=[self.response.pk])
@@ -89,7 +96,7 @@ class AddItemsToQuestionnaireResponseAPITest(APITestCase):
         data = {"items": [self.item1.pk, self.item2.pk, self.item3.pk]}
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('items_exceeds_maximum', str(response.data[0]))
+        self.assertIn('items_exceeds_maximum', str(response.data['items'][0]))
 
     def test_add_items_exceeds_effort(self):
         url = reverse('questionnaire-response-add-items', args=[self.response.pk])
@@ -97,4 +104,4 @@ class AddItemsToQuestionnaireResponseAPITest(APITestCase):
         data = {"items": [self.item2.pk, self.item3.pk]}
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('effort_exceeds_maximum', str(response.data[0]))
+        self.assertIn('effort_exceeds_maximum', str(response.data['items'][0]))
