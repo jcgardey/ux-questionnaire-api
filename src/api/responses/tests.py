@@ -4,12 +4,15 @@ from rest_framework import status
 from .models import QuestionnaireResponse
 
 class QuestionnaireResponseAPITest(APITestCase):
+    def setUp(self):
+        self.questionnaire = Questionnaire.objects.create(selectable_items=2, avaible_effort=100)
     def test_create_questionnaire_response(self):
-        url = reverse('create-questionnaire-response')  # Update if your URL name is different
+        url = reverse('create-questionnaire-response', args=[self.questionnaire.pk])  # Update if your URL name is different
         data = {
             "age": 30,
-            "gender": "L",
+            "gender": "F",
             "role": "DEV",
+            "role_experience": "1-3",
             "agile_experience": "NEVER",
             "project_type": "WEB",
             "project_type_other": "",
@@ -21,7 +24,7 @@ class QuestionnaireResponseAPITest(APITestCase):
         self.assertEqual(QuestionnaireResponse.objects.first().age, 30)
 
     def test_create_questionnaire_response_missing_fields(self):
-        url = reverse('create-questionnaire-response')
+        url = reverse('create-questionnaire-response', args=[self.questionnaire.pk])
         # Remove required fields
         data = {
             "age": 25,
@@ -61,19 +64,24 @@ class AddItemsToQuestionnaireResponseAPITest(APITestCase):
         self.item2 = QuestionnaireItem.objects.create(description='Item 2', effort=20, questionnaire=self.questionnaire)
         self.item3 = QuestionnaireItem.objects.create(description='Item 3', effort=90, questionnaire=self.questionnaire)
 
-    def test_add_items_to_response(self):
+    def test_edit_response_items(self):
         url = reverse('questionnaire-response-add-items', args=[self.response.pk])
         data = {"items": [self.item1.pk, self.item2.pk]}
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(QuestionnaireResponseItem.objects.filter(response=self.response).count(), 2)
 
+        response = self.client.put(url, {"items": [self.item1.pk]}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(QuestionnaireResponseItem.objects.filter(response=self.response).count(), 1)
+
     def test_add_items_invalid_item(self):
         url = reverse('questionnaire-response-add-items', args=[self.response.pk])
+
         data = {"items": [9999]}  # Non-existent item
         response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn('items', response.data)
+        self.assertIn('items', response.data)        
 
     def test_add_items_exceeds_maximum(self):
         url = reverse('questionnaire-response-add-items', args=[self.response.pk])
