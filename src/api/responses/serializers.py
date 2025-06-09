@@ -27,7 +27,7 @@ class CreateQuestionnaireResponseSerializer(serializers.ModelSerializer):
 class AddResponseItemsSerializer(serializers.Serializer):
     items = serializers.ListField(
         child=serializers.IntegerField(),
-        allow_empty=False
+        allow_empty=True
     )
 
     def validate_items(self, value):
