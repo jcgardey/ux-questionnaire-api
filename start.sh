@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git pull
+#git pull
 cd src/
 pip install -r requirements.txt
 python api/manage.py migrate
